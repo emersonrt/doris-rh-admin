@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Credenciais } from 'src/app/models/request/Credenciais';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
     estaLogado = false;
     loginFalhou = false;
-    mensagemErro = '';
+    mensagemErro = 'Preencha corretamente, por favor.';
 
     loginForm = this.fb.nonNullable.group({
         nomeUsuario: ['', [Validators.required]],
@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private router: Router,
         private authService: AuthService,
         private tokenStorage: TokenStorageService
     ) { }
@@ -65,11 +64,18 @@ export class LoginComponent implements OnInit {
                 this.reloadPage();
             },
             error: (err) => {
-                this.mensagemErro = err.error.message;
+                this.mensagemErro = err.error.message || 'Erro ao efetuar operação';
                 this.loginFalhou = true;
                 this.estaCarregando = false;
+                this.loginForm.controls.nomeUsuario.setErrors({ invalid: true });
+                this.loginForm.controls.senha.setErrors({ invalid: true });
             }
         });
+    }
+
+    resetErros(): void {
+        this.loginFalhou = false;
+        this.mensagemErro = 'Preencha corretamente, por favor.';
     }
 
     reloadPage(): void {

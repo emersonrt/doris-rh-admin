@@ -2,24 +2,24 @@
     <mat-card class="m-auto" style="max-width: 380px;">
         <mat-card-title class="text-center my-2">Bem Vindo!</mat-card-title>
 
-        <form class="form-field-full" [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onSubmit()">
+        <form class="form-field-full" [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onSubmit()" #f="ngForm">
 
             <div class="row mt-4">
-                <mat-form-field appearance="outline" class="px-3">
+                <mat-form-field appearance="outline" class="px-3" (change)="resetErros()">
                     <mat-label>Nome de Usuário</mat-label>
                     <input matInput formControlName="nomeUsuario" required>
-                    <mat-error *ngIf="nomeUsuario.invalid">
+                    <mat-error *ngIf="nomeUsuario.invalid && !loginFalhou">
                         <span *ngIf="nomeUsuario.errors"> Preencha corretamente, por favor. </span>
                     </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="row mt-2">
-                <mat-form-field appearance="outline" class="px-3">
+                <mat-form-field appearance="outline" class="px-3" (change)="resetErros()">
                     <mat-label>Senha</mat-label>
                     <input matInput type="password" formControlName="senha" required>
                     <mat-error *ngIf="senha.invalid">
-                        <span *ngIf="senha.errors"> Preencha corretamente, por favor. </span>
+                        <span *ngIf="senha.errors"> {{mensagemErro}} </span>
                     </mat-error>
                 </mat-form-field>
             </div>
