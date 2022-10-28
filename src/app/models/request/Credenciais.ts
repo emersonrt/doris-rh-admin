@@ -1,4 +1,4 @@
 export interface Credenciais {
-    nomeUsuario: string;
-    senha: string;
+    username: string;
+    password: string;
 }

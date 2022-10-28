@@ -7,14 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { HomeModule } from './views/home/home.module';
 import { LoginModule } from './views/login/login.module';
-import { NoopAnimationPlayer } from '@angular/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
+        HeaderModule,
+        MaterialModule,
         BrowserModule,
         HttpClientModule,
         HomeModule,

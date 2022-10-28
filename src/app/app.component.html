@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isLoggedIn else loginRoute">
+    <app-header (alternarBarraLateral)="menuLateralAberto = !menuLateralAberto"></app-header>
+    <mat-sidenav-container>
+
+        <mat-sidenav #sidenav mode="side" [(opened)]="menuLateralAberto" class="bg-primary text-white sidenav">
+            Sidenav content
+            asadsads
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</ng-container>
+
+<ng-template #loginRoute>
+    <router-outlet></router-outlet>
+</ng-template>

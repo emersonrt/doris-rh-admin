@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { HeaderModule } from './../../components/header/header.module';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
+import { MaterialModule } from 'src/app/material.module';
 
 
 
@@ -9,10 +11,14 @@ import { HomeComponent } from './home.component';
         HomeComponent
     ],
     imports: [
+        MaterialModule,
         CommonModule
     ],
     exports: [
         HomeComponent
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
     ]
 })
 export class HomeModule { }

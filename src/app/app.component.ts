@@ -11,23 +11,25 @@ export class AppComponent implements OnInit {
 
     isLoggedIn = false;
     username: string | undefined;
+    menuLateralAberto: boolean = true;
+
+    private perfisAcesso: string[] = [];
 
     constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
 
     ngOnInit(): void {
-        this.isLoggedIn = !!this.tokenStorageService.getToken();
+        this.isLoggedIn = true;//!!this.tokenStorageService.getToken();
 
         if (this.isLoggedIn) {
             const user = this.tokenStorageService.getUser();
-            this.username = user.username;
-        } else {
-            this.router.navigateByUrl('login');
-        }
-    }
+            // this.perfisAcesso = user.perfisAcesso;
 
-    logout(): void {
-        this.tokenStorageService.signOut();
-        window.location.reload();
+            // const t = this.perfisAcesso.includes('ADMIN');
+            // this.username = user.username;
+        } else {
+            // this.router.navigateByUrl('login');
+            this.router.navigateByUrl('home');
+        }
     }
 
 }

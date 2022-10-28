@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
     estaLogado = false;
     loginFalhou = false;
+    perfisAcesso: string[] = [];
     mensagemErro = 'Preencha corretamente, por favor.';
 
     loginForm = this.fb.nonNullable.group({
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         if (this.tokenStorage.getToken()) {
             this.estaLogado = true;
+            this.perfisAcesso = this.tokenStorage.getUser().perfisAcesso;
         }
     }
 
@@ -51,8 +53,8 @@ export class LoginComponent implements OnInit {
         this.estaCarregando = true;
 
         let credenciais: Credenciais = {
-            nomeUsuario: this.loginForm.controls.nomeUsuario.value,
-            senha: this.loginForm.controls.senha.value
+            username: this.loginForm.controls.nomeUsuario.value,
+            password: this.loginForm.controls.senha.value
         };
         this.authService.login(credenciais).subscribe({
             next: (data) => {
@@ -61,10 +63,12 @@ export class LoginComponent implements OnInit {
 
                 this.loginFalhou = false;
                 this.estaLogado = true;
+                this.perfisAcesso = this.tokenStorage.getUser().perfisAcesso;
                 this.reloadPage();
             },
             error: (err) => {
-                this.mensagemErro = err.error.message || 'Erro ao efetuar operação';
+                console.log(err);
+                this.mensagemErro = err.status == 401 ? 'Nome de Usuário ou Senha inválidos.' : err.error?.message;
                 this.loginFalhou = true;
                 this.estaCarregando = false;
                 this.loginForm.controls.nomeUsuario.setErrors({ invalid: true });
