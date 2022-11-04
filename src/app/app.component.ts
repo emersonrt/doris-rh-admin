@@ -18,17 +18,18 @@ export class AppComponent implements OnInit {
     constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
 
     ngOnInit(): void {
-        this.isLoggedIn = true;//!!this.tokenStorageService.getToken();
+        this.isLoggedIn = !!this.tokenStorageService.getToken();
 
         if (this.isLoggedIn) {
             const user = this.tokenStorageService.getUser();
-            // this.perfisAcesso = user.perfisAcesso;
+            this.perfisAcesso = user.perfisAcesso;
 
             // const t = this.perfisAcesso.includes('ADMIN');
-            // this.username = user.username;
-        } else {
-            // this.router.navigateByUrl('login');
+            this.username = user.username;
+            
             this.router.navigateByUrl('home');
+        } else {
+            this.router.navigateByUrl('login');
         }
     }
 

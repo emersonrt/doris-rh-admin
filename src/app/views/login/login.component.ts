@@ -1,5 +1,6 @@
-import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Credenciais } from 'src/app/models/request/Credenciais';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
@@ -14,7 +15,6 @@ export class LoginComponent implements OnInit {
 
     estaCarregando: boolean = false;
 
-    estaLogado = false;
     loginFalhou = false;
     perfisAcesso: string[] = [];
     mensagemErro = 'Preencha corretamente, por favor.';
@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private tokenStorage: TokenStorageService
+        private tokenStorage: TokenStorageService,
+        private router: Router,
+        private snackBar: MatSnackBar
     ) { }
 
     get nomeUsuario() {
@@ -40,8 +42,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.tokenStorage.getToken()) {
-            this.estaLogado = true;
-            this.perfisAcesso = this.tokenStorage.getUser().perfisAcesso;
+            this.router.navigateByUrl('home');
         }
     }
 
@@ -58,20 +59,18 @@ export class LoginComponent implements OnInit {
         };
         this.authService.login(credenciais).subscribe({
             next: (data) => {
-                this.tokenStorage.saveToken(data.accessToken);
-                this.tokenStorage.saveUser(data);
+                this.tokenStorage.saveToken(data.token);
+                this.tokenStorage.saveUser(data.username);
 
                 this.loginFalhou = false;
-                this.estaLogado = true;
                 this.perfisAcesso = this.tokenStorage.getUser().perfisAcesso;
                 this.reloadPage();
             },
             error: (err) => {
-                console.log(err);
-                this.mensagemErro = err.status == 401 ? 'Nome de Usuário ou Senha inválidos.' : err.error?.message;
+                // this.mensagemErro = err.status == 401 ? 'Nome de Usuário ou Senha inválidos.' : err.error?.message;
+                this.snackBar.open('Nome de Usuário ou Senha inválidos!', 'Ok!', { duration: 6000 });
                 this.loginFalhou = true;
                 this.estaCarregando = false;
-                this.loginForm.controls.nomeUsuario.setErrors({ invalid: true });
                 this.loginForm.controls.senha.setErrors({ invalid: true });
             }
         });

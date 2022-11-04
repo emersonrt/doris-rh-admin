@@ -1,0 +1,18 @@
+.example-loading-shade {
+    position: absolute;
+    top: 69px;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    & td {
+        padding-right: 10px;
+    }
+}

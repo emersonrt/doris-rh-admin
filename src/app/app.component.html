@@ -3,11 +3,10 @@
     <mat-sidenav-container>
 
         <mat-sidenav #sidenav mode="side" [(opened)]="menuLateralAberto" class="bg-primary text-white sidenav">
-            Sidenav content
-            asadsads
+            <app-menu-lateral></app-menu-lateral>
         </mat-sidenav>
 
-        <mat-sidenav-content>
+        <mat-sidenav-content class="px-3">
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

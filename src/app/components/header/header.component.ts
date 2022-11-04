@@ -1,5 +1,6 @@
 import { TokenStorageService } from './../../services/token-storage/token-storage.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -10,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
     @Output() alternarBarraLateral: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(private tokenStorageService: TokenStorageService) { }
+    constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
 
     ngOnInit(): void {
     }
@@ -20,10 +21,12 @@ export class HeaderComponent implements OnInit {
         window.location.reload();
     }
 
-    teste() {
-        console.log('ta aqui 1');
-        
+    alternarMenuLateral() {
         this.alternarBarraLateral.emit();
+    }
+
+    redirectConfiguracaoConta() {
+        this.router.navigateByUrl('/configuracao-conta');
     }
 
 }

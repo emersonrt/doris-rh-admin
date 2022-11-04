@@ -1,16 +1,21 @@
 <mat-toolbar class="w-100 d-flex justify-content-between">
     <div class="d-flex align-items-center">
-        <button mat-icon-button class="me-2" (click)="teste()">
+        <button mat-icon-button class="me-2" (click)="alternarMenuLateral()">
             <mat-icon>menu</mat-icon>
         </button>
-        <img src="../../../assets/doris_padrao.png" alt="dóris feliz" class="img-doris mx-2">
-        <span class="fw-light">
-            <span class="fw-bolder">Dóris</span>
-            Admin
-        </span>
+        <a href="/" class="text-decoration-none text-dark">
+            <img src="../../../assets/doris_padrao.png" alt="dóris feliz" class="img-doris mx-2">
+        </a>
+        <a href="/" class="text-decoration-none text-dark">
+            <h1 class="fw-light">
+                <span class="fw-bolder">Dóris</span>
+                Admin
+            </h1>
+        </a>
     </div>
 
     <div>
+        <button mat-button (click)="redirectConfiguracaoConta()">Alterar Dados da Conta</button>
         <button mat-button (click)="logout()">Sair</button>
     </div>
 </mat-toolbar>
