@@ -11,3 +11,8 @@
 ::ng-deep .mat-sidenav-content {
     margin-top: 70px !important;
 }
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background, 
+.mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: #d63384 !important;
+}

@@ -14,6 +14,7 @@ import { MaterialModule } from './material.module';
 import { HeaderModule } from './components/header/header.module';
 import { MenuLateralModule } from './components/menu-lateral/menu-lateral.module';
 import { RegistroUsuarioModule } from './views/registro-usuario/registro-usuario.module';
+import { errorInterceptorProviders } from './helpers/server-error.interceptor';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,7 @@ import { RegistroUsuarioModule } from './views/registro-usuario/registro-usuario
         AppRoutingModule,
         BrowserAnimationsModule
     ],
-    providers: [authInterceptorProviders],
+    providers: [errorInterceptorProviders, authInterceptorProviders],
     bootstrap: [AppComponent],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

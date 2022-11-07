@@ -21,3 +21,7 @@ body {
 .nav-breadcrumb {
     --bs-breadcrumb-divider: ">";
 }
+
+.mat-checkbox-disabled .mat-checkbox-label {
+    color: rgba(0,0,0,.87);
+}

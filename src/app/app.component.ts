@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
             // const t = this.perfisAcesso.includes('ADMIN');
             this.username = user.username;
-            
+
             this.router.navigateByUrl('home');
         } else {
             this.router.navigateByUrl('login');

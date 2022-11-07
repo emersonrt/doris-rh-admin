@@ -1,18 +1,97 @@
 <h2 mat-dialog-title></h2>
 <mat-dialog-content class="mat-typography">
-    <div class="container">
+    <div class="container" [formGroup]="formCandidato" *ngIf="formCandidato">
         <div class="row">
             <div class="col">
-
+                <p class="h4">Dados Pessoais</p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                LOrem ipsum
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" readonly>
+                </mat-form-field>
             </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Data de Nascimento</mat-label>
+                    <input matInput formControlName="dataNascimento" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="email" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Telefone/Celular</mat-label>
+                    <input matInput formControlName="telefoneCelular" readonly>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Carga Horária</mat-label>
+                    <input matInput formControlName="cargaHoraria" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Turno(s)</mat-label>
+                    <input matInput formControlName="turno" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Modalidade de Trabalho</mat-label>
+                    <input matInput formControlName="modalidadeTrabalho" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col" *ngIf="formCandidato.controls['cidadeResidencia'].value">
+                <mat-form-field>
+                    <mat-label>Cidade Residência</mat-label>
+                    <input matInput formControlName="cidadeResidencia" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col d-flex align-items-center" *ngIf="formCandidato.controls['disponibilidadeRealocacao'].value">
+                <mat-checkbox formControlName="disponibilidadeRealocacao" [disabled]="true">
+                    Disponibilidade para Realocação</mat-checkbox>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <!-- <div class="col">
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Data de Nascimento</mat-label>
+                    <input matInput formControlName="dataNascimento" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="email" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Telefone/Celular</mat-label>
+                    <input matInput formControlName="telefoneCelular" readonly>
+                </mat-form-field>
+            </div> -->
         </div>
     </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button id="botaoFechar" mat-button mat-dialog-close cdkFocusInitial>Fechar</button>
+<mat-dialog-actions align="end" id="teste">
+    <button #buttonFecharModal mat-button mat-dialog-close cdkFocusInitial>Fechar</button>
 </mat-dialog-actions>
