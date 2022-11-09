@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
+import { PipesModule } from 'src/app/utils/pipes/pipes.module';
 
 
 
@@ -13,7 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [
         CommonModule,
         MaterialModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PipesModule,
+        NgxMaskModule.forRoot()
     ],
     exports: [
         DetalhesCandidatoModalComponent

@@ -1,7 +1,7 @@
 import { DadosPaginadosRequest } from './../../models/request/DadosPaginadosRequest';
 import { CandidatoService } from './../../services/candidato/candidato.service';
 import { CandidatoTabela } from './../../models/CandidatoTabela';
-import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     colunas: string[] = [
         'nome',
-        'email',
+        'dataCadastro',
         'areaInteresse',
         'hardSkills',
         'softSkills',

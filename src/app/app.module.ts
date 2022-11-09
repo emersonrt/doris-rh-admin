@@ -15,6 +15,7 @@ import { HeaderModule } from './components/header/header.module';
 import { MenuLateralModule } from './components/menu-lateral/menu-lateral.module';
 import { RegistroUsuarioModule } from './views/registro-usuario/registro-usuario.module';
 import { errorInterceptorProviders } from './helpers/server-error.interceptor';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [

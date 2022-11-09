@@ -1,12 +1,11 @@
-import { throwError } from 'rxjs';
 import { CandidatoService } from './../../services/candidato/candidato.service';
-import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit, AfterContentInit, AfterContentChecked, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CandidatoDetalhadoResponse } from 'src/app/models/response/CandidatoDetalhadoResponse';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatButton } from '@angular/material/button';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
     selector: 'app-detalhes-candidato-modal',
@@ -16,6 +15,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChecked {
 
     @ViewChild("buttonFecharModal", { read: ElementRef }) buttonFecharModal!: ElementRef;
+    @ViewChild(MatAccordion) accordion!: MatAccordion;
 
     erroNaConsulta: boolean = false;
     dadosCandidato: CandidatoDetalhadoResponse | undefined;
@@ -90,7 +90,7 @@ export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChec
             turno: [dado.turno],
             modalidadeTrabalho: [dado.modalidadeTrabalho],
             cidadeResidencia: [dado.cidadeResidencia],
-            disponibilidadeRealocacao: [{value: dado.disponibilidadeRealocacao, disabled: true}],
+            disponibilidadeRealocacao: [{ value: dado.disponibilidadeRealocacao, disabled: true }],
             areaInteresse: [dado.areaInteresse],
             idiomas: this.fb.array([]),
             certificacoes: this.fb.array([]),
@@ -99,6 +99,22 @@ export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChec
             pontosFracos: [dado.pontosFracos],
             informacaoRelevante: [dado.informacaoRelevante]
         });
+
+        dado.formacoes.forEach(formacao => this.formacoes.push(
+            this.fb.group({
+                nomeInstituicao: formacao.nomeInstituicao,
+                nomeCurso: formacao.nomeCurso,
+                tipoGraduacao: formacao.tipoGraduacao,
+                dataInicio: formacao.dataInicio,
+                dataTermino: formacao.dataTermino
+            })
+        ));
+
+        dado.linksRelevantes.forEach(link => this.linksRelevantes.push(
+            this.fb.group({
+                link: link
+            })
+        ));
 
         dado.hardSkills.forEach(hardSkill => this.hardSkills.push(
             this.fb.group({
@@ -111,13 +127,26 @@ export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChec
             this.fb.group({ habilidade: softSkill.habilidade })
         ));
 
-        // this.formCandidato.disable();
-        // dado.formacoes.forEach(formacao => this.formacoes.push(
-        //     this.fb.group({
-        //         habilidade: formacao.,
-        //         tempoExperiencia: formacao.tempoExperiencia
-        //     })
-        // ));
+        dado.idiomas.forEach(idioma => this.idiomas.push(
+            this.fb.group({
+                idioma: idioma.idioma,
+                nivelFluencia: idioma.nivelFluencia
+            })
+        ));
+
+        dado.certificacoes.forEach(certificacao => this.certificacoes.push(
+            this.fb.group({
+                nome: certificacao.nome,
+                organizacaoEmissora: certificacao.organizacaoEmissora,
+                dataEmissao: certificacao.dataEmissao,
+                urlCodigo: certificacao.urlCodigo
+            })
+        ));
+
+    }
+
+    abrirLink(link: string) {
+        window.open(link, '_blank')?.focus();
     }
 
 

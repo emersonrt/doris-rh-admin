@@ -1,21 +1,21 @@
 export interface CandidatoDetalhadoResponse {
-    id: number;
-    nome: string;
-    dataNascimento: string;
-    telefoneCelular: string;
-    email: string;
-    hardSkills: HardSkill[];
-    softSkills: SoftSkill[];
-    formacoes: Formacao[];
-    linksRelevantes: string[];
-    cargaHoraria: string;
-    turno: string;
-    modalidadeTrabalho: string;
-    cidadeResidencia: string;
-    disponibilidadeRealocacao: boolean;
-    areaInteresse: string;
-    idiomas: Idioma[];
-    certificacoes: Certificacao[];
+    id: number; //
+    nome: string; //
+    dataNascimento: string; //
+    telefoneCelular: string; //
+    email: string; //
+    hardSkills: HardSkill[]; //
+    softSkills: SoftSkill[]; //
+    formacoes: Formacao[]; //
+    linksRelevantes: string[]; //
+    cargaHoraria: string; //
+    turno: string; //
+    modalidadeTrabalho: string; //
+    cidadeResidencia: string; //
+    disponibilidadeRealocacao: boolean; //
+    areaInteresse: string; //
+    idiomas: Idioma[]; //
+    certificacoes: Certificacao[]; //
     experiencias: Experiencia[];
     pontosFortes: string;
     pontosFracos: string;

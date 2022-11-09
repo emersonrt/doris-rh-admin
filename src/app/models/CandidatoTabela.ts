@@ -1,7 +1,7 @@
 export interface CandidatoTabela {
     idCandidato: string;
     nome: string;
-    email: string;
+    dataCadastro: string;
     areaInteresse: string;
     hardSkills: string[];
     softSkills: string[];
