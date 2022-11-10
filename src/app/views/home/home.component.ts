@@ -12,7 +12,7 @@ import { DetalhesCandidatoModalComponent } from 'src/app/components/detalhes-can
 
 const filtrosIniciais: DadosPaginadosRequest = {
     page: 0,
-    pageSize: 100,
+    pageSize: 15,
     sort: 'nome',
     sortDirection: OrdenacaoDirecao.ASCENDENTE
 };
