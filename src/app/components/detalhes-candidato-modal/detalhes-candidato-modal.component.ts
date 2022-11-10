@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-detalhes-candidato-modal',
@@ -18,11 +19,13 @@ export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChec
     @ViewChild(MatAccordion) accordion!: MatAccordion;
 
     erroNaConsulta: boolean = false;
+    carregandoDados: boolean = true;
     dadosCandidato: CandidatoDetalhadoResponse | undefined;
     formCandidato!: FormGroup;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public idCandidato: string,
+        @Inject(DOCUMENT) private document: Document,
         private candidatoService: CandidatoService,
         private snackBar: MatSnackBar,
         private fb: FormBuilder
@@ -57,14 +60,17 @@ export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChec
     }
 
     ngOnInit(): void {
+        this.carregandoDados = true;
         this.candidatoService.buscarCandidatoDetalhe(this.idCandidato).subscribe({
             next: (response) => {
                 if (!response.id) return;
                 this.carregarDadosForm(response);
+                this.carregandoDados = false;
             },
             error: (err: HttpErrorResponse) => {
                 this.snackBar.open('Erro: ' + err.error.message, undefined, { duration: 3000 });
                 this.erroNaConsulta = true;
+                this.carregandoDados = false;
             }
         });
     }
@@ -143,10 +149,24 @@ export class DetalhesCandidatoModalComponent implements OnInit, AfterContentChec
             })
         ));
 
+        dado.experiencias.forEach(experiencia => this.experiencias.push(
+            this.fb.group({
+                empresaOrganizacao: experiencia.empresaOrganizacao,
+                tituloCargo: experiencia.tituloCargo,
+                descricao: experiencia.descricao,
+                dataInicio: experiencia.dataInicio,
+                dataTermino: experiencia.dataTermino
+            })
+        ));
+
     }
 
     abrirLink(link: string) {
-        window.open(link, '_blank')?.focus();
+        if (link.includes('http')) {
+            window.open(link, "_blank");
+        } else {
+            window.open('http://' + link, "_blank");
+        }
     }
 
 

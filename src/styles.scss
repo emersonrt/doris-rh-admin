@@ -25,3 +25,16 @@ body {
 .mat-checkbox-disabled .mat-checkbox-label {
     color: rgba(0,0,0,.87);
 }
+
+.loading-shade {
+    position: absolute;
+    top: 69px;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 99999999999999999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

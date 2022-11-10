@@ -1,5 +1,9 @@
-<h2 mat-dialog-title></h2>
+<h1 mat-dialog-title>Dados Detalhados do Candidato</h1>
 <mat-dialog-content class="mat-typography">
+
+    <div *ngIf="carregandoDados" class="loading-shade">
+        <mat-spinner *ngIf="carregandoDados"></mat-spinner>
+    </div>
 
     <div class="container" [formGroup]="formCandidato" *ngIf="formCandidato">
         <div class="row">
@@ -72,7 +76,7 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Formação
+                            Formações
                         </mat-panel-title>
                         <mat-panel-description>
                             Informações sobre formações/graduações
@@ -84,6 +88,7 @@
                         <div *ngFor="let formacao of formacoes.controls; let i=index">
                             <div [formGroupName]="i" class="row">
                                 <hr>
+                                <label class="text-muted mb-1">{{'Formação ' + (i+1) + ': '}}</label>
                                 <div class="col-4">
                                     <mat-form-field>
                                         <mat-label>Nome da Instituição</mat-label>
@@ -137,7 +142,7 @@
                         <div *ngFor="let link of linksRelevantes.controls; let i=index">
                             <div [formGroupName]="i" class="row">
                                 <hr>
-                                <div class="col">
+                                <div class="col mb-3">
                                     <label class="text-muted" for="link">{{'Link ' + (i+1) + ': '}}</label>
                                     <a id="link" (click)="abrirLink(link.get('link')?.value)"
                                         class="link-primary mx-1">{{link.get('link')?.value}}</a>
@@ -178,6 +183,7 @@
                     <div formArrayName="hardSkills" *ngIf="hardSkills.controls.length > 0; else semDados" class="row">
                         <div *ngFor="let hardSkill of hardSkills.controls; let i=index" class="col-6">
                             <div [formGroupName]="i" class="row">
+                                <label class="text-muted mb-1">{{'Hard Skill ' + (i+1) + ': '}}</label>
                                 <div class="col-6">
                                     <mat-form-field>
                                         <mat-label>Habilidade</mat-label>
@@ -211,6 +217,7 @@
                     <div formArrayName="softSkills" *ngIf="softSkills.controls.length > 0; else semDados" class="row">
                         <div *ngFor="let softSkill of softSkills.controls; let i=index" class="col-6">
                             <div [formGroupName]="i" class="row">
+                                <label class="text-muted mb-1">{{'Soft Skill ' + (i+1) + ': '}}</label>
                                 <div class="col-10">
                                     <mat-form-field>
                                         <mat-label>Habilidade</mat-label>
@@ -238,6 +245,7 @@
                     <div formArrayName="idiomas" *ngIf="idiomas.controls.length > 0; else semDados" class="row">
                         <div *ngFor="let idioma of idiomas.controls; let i=index" class="col-6">
                             <div [formGroupName]="i" class="row">
+                                <label class="text-muted mb-1">{{'Idioma ' + (i+1) + ': '}}</label>
                                 <div class="col-5">
                                     <mat-form-field>
                                         <mat-label>Idioma</mat-label>
@@ -272,6 +280,7 @@
                         <div *ngFor="let certificacao of certificacoes.controls; let i=index">
                             <div [formGroupName]="i" class="row">
                                 <hr>
+                                <label class="text-muted mb-1">{{'Certificação ' + (i+1) + ': '}}</label>
                                 <div class="col-5">
                                     <mat-form-field>
                                         <mat-label>Nome</mat-label>
@@ -287,7 +296,8 @@
                                 <div class="col-2">
                                     <mat-form-field>
                                         <mat-label>Data de Emissão</mat-label>
-                                        <input matInput [value]="certificacao.get('dataEmissao')?.value| maskData" readonly>
+                                        <input matInput [value]="certificacao.get('dataEmissao')?.value| maskData"
+                                            readonly>
                                     </mat-form-field>
                                 </div>
                                 <div class="col">
@@ -309,11 +319,90 @@
                 <p class="h4">Habilidades</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Experiências
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Experiências anteriores relevantes
+                            <mat-icon class="mx-2">work</mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div formArrayName="experiencias" *ngIf="experiencias.controls.length > 0; else semDados">
+                        <div *ngFor="let experiencia of experiencias.controls; let i=index">
+                            <div [formGroupName]="i" class="row">
+                                <label class="text-muted mb-1">{{'Experiência ' + (i+1) + ': '}}</label>
+                                <div class="col-4">
+                                    <mat-form-field>
+                                        <mat-label>Empresa/Organização</mat-label>
+                                        <input matInput formControlName="empresaOrganizacao" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <mat-form-field>
+                                        <mat-label>Título/Cargo</mat-label>
+                                        <input matInput formControlName="tituloCargo" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-2">
+                                    <mat-form-field>
+                                        <mat-label>Data Início</mat-label>
+                                        <input matInput [value]="experiencia.get('dataInicio')?.value| maskData"
+                                            readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-2">
+                                    <mat-form-field>
+                                        <mat-label>Data Término</mat-label>
+                                        <input matInput [value]="experiencia.get('dataTermino')?.value| maskData"
+                                            readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field>
+                                        <mat-label>Descrição de Atividades</mat-label>
+                                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                            cdkAutosizeMinRows="1" cdkAutosizeMaxRows="20" formControlName="descricao"
+                                            readonly></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </div>
+        </div>
 
         <hr>
         <div class="row mt-4">
             <div class="col">
                 <p class="h4">Atitudes</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field>
+                    <mat-label>Pontos Fortes</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="20" formControlName="pontosFortes" readonly></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field>
+                    <mat-label>Pontos Fracos</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="20" formControlName="pontosFracos" readonly></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Informação(ões) Relevante(s)</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="20" formControlName="informacaoRelevante" readonly></textarea>
+                </mat-form-field>
             </div>
         </div>
     </div>

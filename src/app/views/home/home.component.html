@@ -18,7 +18,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
         </mat-form-field> -->
 
-        <div *ngIf="carregandoDados" class="example-loading-shade">
+        <div *ngIf="carregandoDados" class="loading-shade">
             <mat-spinner *ngIf="carregandoDados"></mat-spinner>
         </div>
 
