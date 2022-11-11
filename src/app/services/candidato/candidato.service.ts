@@ -16,13 +16,21 @@ export class CandidatoService extends GeneralService {
     }
 
     buscarCandidatosPaginado(params: DadosPaginadosRequest): Observable<CandidatoTabelaResponse> {
-        const options = {
-            params: new HttpParams()
-                .set('page', params.page)
-                .set('size', params.pageSize)
-                .set('sort', params.sort + ',' + params.sortDirection)
-        };
-        return this.http.get<CandidatoTabelaResponse>(this.baseUrl + 'candidato/paginado', options);
+        let options = new HttpParams({
+            fromObject: {
+                'page': params.page,
+                'size': params.pageSize,
+                'sort': params.sort + ',' + params.sortDirection,
+                'nome': params.filtros.nome,
+                'areaInteresse': params.filtros.areaInteresse,
+                'dataCadastro': params.filtros.dataCadastro,
+                'idiomas': params.filtros.idiomas,
+                'hardSkills': params.filtros.hardSkills,
+                'softSkills': params.filtros.softSkills
+            }
+        })
+
+        return this.http.get<CandidatoTabelaResponse>(this.baseUrl + 'candidato/paginado', { params: options });
     }
 
     buscarCandidatoDetalhe(idCandidato: string): Observable<CandidatoDetalhadoResponse> {

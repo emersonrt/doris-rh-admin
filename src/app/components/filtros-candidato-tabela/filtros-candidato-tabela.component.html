@@ -1,0 +1,121 @@
+<section>
+    <div class="container-fluid mb-2">
+        <div class="row" *ngIf="exibirFiltrosAvancados">
+            <div class="col">
+                <h3 class="fs-5">Filtros</h3>
+
+                <form [formGroup]="formFiltros" (submit)="aplicarFiltros()">
+                    <div class="row">
+                        <div class="col-3">
+                            <mat-form-field class="col-11" appearance="outline">
+                                <mat-label>Nome do Candidato</mat-label>
+                                <input matInput formControlName="nome" name="nome">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field class="col-11" appearance="outline">
+                                <mat-label>Área de Interesse</mat-label>
+                                <mat-select formControlName="areaInteresse" name="areaInteresse">
+                                    <mat-option *ngFor="let areaInteresse of areaInteresseList" [value]="areaInteresse">
+                                      {{areaInteresse}}
+                                    </mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field class="col-11" appearance="outline">
+                                <mat-label>Data de Cadastro</mat-label>
+                                <mat-select formControlName="dataCadastro" name="dataCadastro">
+                                    <mat-option *ngFor="let dataCadastro of dataCadastroList" [value]="dataCadastro">
+                                      {{dataCadastro}}
+                                    </mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field class="col-11" appearance="outline">
+                                <mat-label>Idioma</mat-label>
+                                <mat-select formControlName="idiomas" name="idioma" multiple>
+                                    <mat-option *ngFor="let idioma of idiomasList" [value]="idioma">
+                                      {{idioma}}
+                                    </mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="col-10" appearance="outline">
+                                <mat-label>Hard Skills</mat-label>
+                                <mat-chip-list #hardSkills formControlName="hardSkills" aria-label="Hard Skills">
+                                    <mat-chip *ngFor="let hardSkill of formFiltros.get('hardSkills')?.value" (removed)="removeHardSkill(hardSkill)">
+                                      {{hardSkill}}
+                                      <button matChipRemove>
+                                        <mat-icon>cancel</mat-icon>
+                                      </button>
+                                    </mat-chip>
+                                    <input placeholder=""
+                                           [matChipInputFor]="hardSkills"
+                                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                           [matChipInputAddOnBlur]="true"
+                                           (matChipInputTokenEnd)="adicionarHardSkill($event)">
+                                  </mat-chip-list>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="col-10" appearance="outline">
+                                <mat-label>Soft Skills</mat-label>
+                                <mat-chip-list #softSkills formControlName="softSkills" aria-label="Hard Skills">
+                                    <mat-chip *ngFor="let softSkill of formFiltros.get('softSkills')?.value" (removed)="removeSoftSkill(softSkill)">
+                                      {{softSkill}}
+                                      <button matChipRemove>
+                                        <mat-icon>cancel</mat-icon>
+                                      </button>
+                                    </mat-chip>
+                                    <input placeholder=""
+                                           [matChipInputFor]="softSkills"
+                                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                           [matChipInputAddOnBlur]="true"
+                                           (matChipInputTokenEnd)="adicionarSoftSkill($event)">
+                                  </mat-chip-list>
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+
+                    <button type="submit" class="float-end" mat-raised-button color="primary">Aplicar Filtros</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="float-start" mat-button color="primary"
+        (click)="exibirFiltrosAvancados = !exibirFiltrosAvancados">
+        {{exibirFiltrosAvancados ? 'Fechar Filtros' : 'Exibir Filtros'}}
+        <mat-icon *ngIf="!exibirFiltrosAvancados">expand_more</mat-icon>
+        <mat-icon *ngIf="exibirFiltrosAvancados">expand_less</mat-icon>
+    </button>
+</section>
+
+<!-- <mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Filtros
+        </mat-panel-title>
+        <mat-panel-description>
+            Ferramentas para refinar a busca por candidatos
+            <mat-icon class="mx-2">search</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form [formGroup]="formFiltros" (submit)="aplicarFiltros()">
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome">
+                </mat-form-field>
+            </div>
+        </div>
+        <button type="submit" class="float-end" mat-raised-button color="primary">Aplicar Filtros</button>
+    </form>
+</mat-expansion-panel> -->

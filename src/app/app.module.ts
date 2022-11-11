@@ -24,7 +24,6 @@ import { NgxMaskModule } from 'ngx-mask';
     imports: [
         HeaderModule,
         MenuLateralModule,
-        DetalhesCandidatoModalModule,
         MaterialModule,
         BrowserModule,
         HttpClientModule,

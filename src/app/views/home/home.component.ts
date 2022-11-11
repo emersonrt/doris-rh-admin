@@ -1,3 +1,4 @@
+import { FiltrosCandidatoTabelaComponent } from './../../components/filtros-candidato-tabela/filtros-candidato-tabela.component';
 import { DadosPaginadosRequest } from './../../models/request/DadosPaginadosRequest';
 import { CandidatoService } from './../../services/candidato/candidato.service';
 import { CandidatoTabela } from './../../models/CandidatoTabela';
@@ -14,7 +15,15 @@ const filtrosIniciais: DadosPaginadosRequest = {
     page: 0,
     pageSize: 15,
     sort: 'nome',
-    sortDirection: OrdenacaoDirecao.ASCENDENTE
+    sortDirection: OrdenacaoDirecao.ASCENDENTE,
+    filtros: {
+        nome: '',
+        areaInteresse: '',
+        dataCadastro: '',
+        idiomas: [],
+        hardSkills: [],
+        softSkills: []
+    }
 };
 
 @Component({
@@ -39,6 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(FiltrosCandidatoTabelaComponent) filtro!: FiltrosCandidatoTabelaComponent;
 
     constructor(
         private candidatoService: CandidatoService,
@@ -47,8 +57,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
         this.carregandoDados = false;
-        merge(this.sort.sortChange, this.paginator.page)
+        merge(this.sort.sortChange, this.paginator.page, this.filtro.filtroChange)
             .pipe(
                 startWith({}),
                 switchMap(() => {
@@ -56,6 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     this.filtroPaginacao.pageSize = this.paginator.pageSize;
                     this.filtroPaginacao.sort = this.sort.active;
                     this.filtroPaginacao.sortDirection = this.sort.direction;
+                    this.filtroPaginacao.filtros = this.filtro.filtros;
                     this.carregandoDados = true;
                     return this.candidatoService.buscarCandidatosPaginado(this.filtroPaginacao
                     ).pipe(catchError(() => of(null)));

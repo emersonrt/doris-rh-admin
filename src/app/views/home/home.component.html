@@ -13,10 +13,7 @@
     <mat-divider inset class="my-3"></mat-divider>
 
     <mat-card-content>
-        <!-- <mat-form-field appearance="standard">
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-        </mat-form-field> -->
+        <app-filtros-candidato-tabela></app-filtros-candidato-tabela>
 
         <div *ngIf="carregandoDados" class="loading-shade">
             <mat-spinner *ngIf="carregandoDados"></mat-spinner>
@@ -78,10 +75,9 @@
                 <tr mat-header-row *matHeaderRowDef="colunas"></tr>
                 <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
 
-                <!-- Row shown when there is no matching data. -->
-                <!-- <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                </tr> -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">Nenhum dado encontrado para os filtros selecionados.</td>
+                </tr>
             </table>
 
             <mat-paginator [length]="lengthDados" [pageSize]="filtroPaginacao.pageSize"
