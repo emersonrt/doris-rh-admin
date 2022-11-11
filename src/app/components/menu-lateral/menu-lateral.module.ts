@@ -6,15 +6,15 @@ import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({
-  declarations: [
-    MenuLateralComponent
-  ],
-  imports: [
-    CommonModule,
-    MaterialModule
-  ],
-  exports: [
-    MenuLateralComponent
-  ]
+    declarations: [
+        MenuLateralComponent
+    ],
+    imports: [
+        CommonModule,
+        MaterialModule
+    ],
+    exports: [
+        MenuLateralComponent
+    ]
 })
 export class MenuLateralModule { }

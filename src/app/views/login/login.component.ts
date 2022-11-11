@@ -67,7 +67,6 @@ export class LoginComponent implements OnInit {
                 this.reloadPage();
             },
             error: (err) => {
-                // this.mensagemErro = err.status == 401 ? 'Nome de Usuário ou Senha inválidos.' : err.error?.message;
                 this.snackBar.open('Nome de Usuário ou Senha inválidos!', 'Ok!', { duration: 6000 });
                 this.loginFalhou = true;
                 this.estaCarregando = false;

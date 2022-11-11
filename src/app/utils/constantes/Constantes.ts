@@ -11,10 +11,10 @@ export const IDIOMAS = [
 ];
 
 export const ULTIMOS_DIAS = [
-    'Últimos 7 dias',
-    'Últimos 30 dias',
-    'Últimos 3 meses',
-    'Últimos 6 meses'
+    { key: 'Últimos 7 dias', value: 'ultimos_7_dias' },
+    { key: 'Últimos 30 dias', value: 'ultimos_30_dias' },
+    { key: 'Últimos 3 meses', value: 'ultimos_3_meses' },
+    { key: 'Últimos 6 meses', value: 'ultimos_6_meses' }
 ];
 
 export const AREAS_INTERESSE = [

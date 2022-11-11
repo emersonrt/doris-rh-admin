@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FiltrosEvent } from 'src/app/models/FiltrosEvent';
 import { AREAS_INTERESSE, IDIOMAS, ULTIMOS_DIAS } from 'src/app/utils/constantes/Constantes';
@@ -24,19 +24,12 @@ export class FiltrosCandidatoTabelaComponent {
 
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
     readonly areaInteresseList: string[] = AREAS_INTERESSE;
-    readonly dataCadastroList: string[] = ULTIMOS_DIAS;
+    readonly dataCadastroList = ULTIMOS_DIAS;
     readonly idiomasList: string[] = IDIOMAS;
     readonly filtroChange: EventEmitter<FiltrosEvent> = new EventEmitter<FiltrosEvent>;
 
     constructor(private fb: FormBuilder) {
-        this.formFiltros = this.fb.group({
-            nome: this.fb.control(''),
-            areaInteresse: this.fb.control(''),
-            dataCadastro: this.fb.control(''),
-            idiomas: this.fb.control([]),
-            hardSkills: this.fb.control([]),
-            softSkills: this.fb.control([])
-        });
+        this.formFiltros = this.getFormInicial();
     }
 
     get hardSkills() {
@@ -59,6 +52,11 @@ export class FiltrosCandidatoTabelaComponent {
         console.log(this.filtros);
 
         this.filtroChange.emit();
+    }
+
+    limparFiltros() {
+        this.formFiltros = this.getFormInicial();
+        this.aplicarFiltros();
     }
 
     adicionarHardSkill(event: any) {
@@ -95,6 +93,17 @@ export class FiltrosCandidatoTabelaComponent {
         if (index >= 0) {
             this.softSkills.value.splice(index, 1);
         }
+    }
+
+    getFormInicial(): FormGroup {
+        return this.fb.group({
+            nome: this.fb.control(''),
+            areaInteresse: this.fb.control(''),
+            dataCadastro: this.fb.control(''),
+            idiomas: this.fb.control([]),
+            hardSkills: this.fb.control([]),
+            softSkills: this.fb.control([])
+        });
     }
 
 }
