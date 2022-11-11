@@ -11,7 +11,7 @@ import { AREAS_INTERESSE, IDIOMAS, ULTIMOS_DIAS } from 'src/app/utils/constantes
 })
 export class FiltrosCandidatoTabelaComponent {
 
-    exibirFiltrosAvancados: boolean = true;
+    exibirFiltros: boolean = false;
     formFiltros!: FormGroup;
     filtros: FiltrosEvent = {
         nome: '',

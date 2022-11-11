@@ -1,6 +1,6 @@
 <section>
     <div class="container-fluid mb-2">
-        <div class="row" *ngIf="exibirFiltrosAvancados">
+        <div class="row" *ngIf="exibirFiltros">
             <div class="col">
                 <h3 class="fs-5">Filtros</h3>
 
@@ -100,12 +100,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <button type="button" class="" mat-button (click)="exibirFiltrosAvancados = !exibirFiltrosAvancados">
-                {{exibirFiltrosAvancados ? 'Esconder Filtros' : 'Exibir Filtros'}}
-                <mat-icon *ngIf="!exibirFiltrosAvancados">expand_more</mat-icon>
-                <mat-icon *ngIf="exibirFiltrosAvancados">expand_less</mat-icon>
+    <div class="row d-flex justify-content-center">
+        <div class="col-4">
+            <button type="button" class="w-100" mat-button (click)="exibirFiltros = !exibirFiltros">
+                {{exibirFiltros ? 'Esconder Filtros' : 'Exibir Filtros'}}
+                <mat-icon *ngIf="!exibirFiltros">expand_more</mat-icon>
+                <mat-icon *ngIf="exibirFiltros">expand_less</mat-icon>
             </button>
         </div>
     </div>
