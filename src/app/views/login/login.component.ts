@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(credenciais).subscribe({
             next: (data) => {
                 this.tokenStorage.saveToken(data.token);
-                this.tokenStorage.saveUser(data.username);
+                this.tokenStorage.saveUser(data);                
 
                 this.loginFalhou = false;
                 this.perfisAcesso = this.tokenStorage.getUser().perfisAcesso;

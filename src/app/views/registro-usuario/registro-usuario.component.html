@@ -13,5 +13,51 @@
     <mat-divider inset class="my-3"></mat-divider>
 
     <mat-card-content>
+        <div class="container-fluid">
+            <form #fu [formGroup]="usuarioForm" (submit)="cadastrarUsuario(fu)">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>E-mail</mat-label>
+                            <input type="email" matInput formControlName="email" name="email">
+                            <mat-error
+                                *ngIf="usuarioForm.get('email')?.hasError('email') && !usuarioForm.get('email')?.hasError('required')">
+                                Insira um e-mail válido, por favor
+                            </mat-error>
+                            <mat-error *ngIf="usuarioForm.get('email')?.hasError('required')">
+                                E-mail é um campo obrigatório
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Nome de Usuário</mat-label>
+                            <input matInput formControlName="nomeUsuario" name="nomeUsuario">
+                            <mat-error *ngIf="usuarioForm.get('nomeUsuario')?.hasError('required')">
+                                Nome de usuário é um campo obrigatório
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Senha</mat-label>
+                            <input type="password" matInput formControlName="senha" name="senha">
+                            <mat-error *ngIf="usuarioForm.get('senha')?.hasError('required')">
+                                Senha é um campo obrigatório
+                            </mat-error>
+                            <mat-error *ngIf="usuarioForm.get('senha')?.hasError('minlength')">
+                                A senha deve possuir no mínimo 6 caracteres
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="float-end" mat-raised-button color="primary"
+                            [disabled]="!usuarioForm.valid">Cadastrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </mat-card-content>
 </mat-card>
