@@ -1,4 +1,5 @@
-import { MaskDataPipe } from './mask-data.pipe';
+import { MaskDataPipe } from './mask-data/mask-data.pipe';
+import { MaskDataMesAnoPipe } from './mask-data-mes-ano/mask-data-mes-ano.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,13 +7,15 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
-        MaskDataPipe
+        MaskDataPipe,
+        MaskDataMesAnoPipe
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        MaskDataPipe
+        MaskDataPipe,
+        MaskDataMesAnoPipe
     ]
 })
 export class PipesModule { }

@@ -110,13 +110,13 @@
                                 <div class="col-2">
                                     <mat-form-field>
                                         <mat-label>Data de Início</mat-label>
-                                        <input matInput [value]="formacao.get('dataInicio')?.value| maskData" readonly>
+                                        <input matInput [value]="formacao.get('dataInicio')?.value| maskDataMesAno" readonly>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-2">
                                     <mat-form-field>
                                         <mat-label>Data de Término</mat-label>
-                                        <input matInput [value]="formacao.get('dataTermino')?.value| maskData" readonly>
+                                        <input matInput [value]="formacao.get('dataTermino')?.value| maskDataMesAno" readonly>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -296,7 +296,7 @@
                                 <div class="col-2">
                                     <mat-form-field>
                                         <mat-label>Data de Emissão</mat-label>
-                                        <input matInput [value]="certificacao.get('dataEmissao')?.value| maskData"
+                                        <input matInput [value]="certificacao.get('dataEmissao')?.value| maskDataMesAno"
                                             readonly>
                                     </mat-form-field>
                                 </div>
@@ -350,14 +350,14 @@
                                 <div class="col-2">
                                     <mat-form-field>
                                         <mat-label>Data Início</mat-label>
-                                        <input matInput [value]="experiencia.get('dataInicio')?.value| maskData"
+                                        <input matInput [value]="experiencia.get('dataInicio')?.value| maskDataMesAno"
                                             readonly>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-2">
                                     <mat-form-field>
                                         <mat-label>Data Término</mat-label>
-                                        <input matInput [value]="experiencia.get('dataTermino')?.value| maskData"
+                                        <input matInput [value]="experiencia.get('dataTermino')?.value| maskDataMesAno"
                                             readonly>
                                     </mat-form-field>
                                 </div>
