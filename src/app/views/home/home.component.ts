@@ -2,11 +2,11 @@ import { FiltrosCandidatoTabelaComponent } from './../../components/filtros-cand
 import { DadosPaginadosRequest } from './../../models/request/DadosPaginadosRequest';
 import { CandidatoService } from './../../services/candidato/candidato.service';
 import { CandidatoTabela } from './../../models/CandidatoTabela';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { catchError, map, merge, of, startWith, switchMap } from 'rxjs';
+import { catchError, map, merge, of, startWith, Subject, switchMap } from 'rxjs';
 import { OrdenacaoDirecao } from 'src/app/models/enums/OrdenacaoDirecao.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { DetalhesCandidatoModalComponent } from 'src/app/components/detalhes-candidato-modal/detalhes-candidato-modal.component';
