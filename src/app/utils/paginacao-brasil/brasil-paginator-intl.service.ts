@@ -18,6 +18,6 @@ export class BrasilPaginatorIntl implements MatPaginatorIntl {
       return $localize`Página 1 of 1`;
     }
     const amountPages = Math.ceil(length / pageSize);
-    return $localize`Página ${page + 1} de ${amountPages}`;
+    return $localize`Página ${page + 1} de ${amountPages}` + ` - Total de ${length} Itens`;
   }
 }
