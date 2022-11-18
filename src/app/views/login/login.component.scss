@@ -5,3 +5,16 @@
 .w-380 {
     width: 380px;
 }
+
+.loading-shade-login {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 99999999999999999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

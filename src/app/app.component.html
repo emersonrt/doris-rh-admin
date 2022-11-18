@@ -6,7 +6,7 @@
             <app-menu-lateral></app-menu-lateral>
         </mat-sidenav>
 
-        <mat-sidenav-content class="px-3">
+        <mat-sidenav-content class="px-3" [class.ml-231]="menuLateralAberto" >
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>
